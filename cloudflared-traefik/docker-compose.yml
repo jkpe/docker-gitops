@@ -1,0 +1,21 @@
+networks:
+  proxy:
+    driver: bridge
+    external: true
+
+services:
+  cloudflared-traefik:
+    env_file:
+      - ../stack.env
+    command:
+      - "tunnel"
+      - "--post-quantum"
+      - "--no-autoupdate"
+      - "run"
+    container_name: "cloudflared-traefik"
+    image: "cloudflare/cloudflared:2023.8.2"
+    restart: "unless-stopped"
+    networks:
+      - "proxy"
+
+version: "3.8"

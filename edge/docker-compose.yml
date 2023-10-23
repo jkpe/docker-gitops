@@ -1,0 +1,64 @@
+networks:
+  proxy:
+    driver: bridge
+    external: true
+
+services:
+  cloudflared:
+    env_file:
+      - ../stack.env
+    command:
+      - "tunnel"
+      - "--post-quantum"
+      - "--no-autoupdate"
+      - "run"
+    container_name: "cloudflared"
+    image: "cloudflare/cloudflared:2023.8.2"
+    restart: "always"
+
+  adguardhome:
+    container_name: "adguardhome"
+    image: "adguard/adguardhome:v0.107.40"
+    restart: "always"
+    ports:
+      - '53:53'
+      - '53:53/udp'
+    networks:
+      - "proxy"
+    volumes:
+      - "/opt/adguard:/opt/adguardhome/work"
+      - "/opt/adguard-conf:/opt/adguardhome/conf"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.adguard.entryPoints: https
+      traefik.http.services.adguard.loadbalancer.server.port: 3001
+
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:2.10.4'
+    restart: "always"
+    ports:
+      - '443:443'
+    networks:
+      - "proxy"
+    volumes:
+      - /opt/nginxproxymanager/data:/data
+      - /opt/nginxproxymanager/letsencrypt:/etc/letsencrypt
+    labels:
+      traefik.enable: true
+      traefik.http.routers.nginx-proxy-manager.entryPoints: https
+      traefik.http.services.nginx-proxy-manager.loadbalancer.server.port: 81
+
+  dozzle:
+    container_name: dozzle
+    image: "amir20/dozzle:v5.0.10"
+    restart: "always"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - "proxy"
+    labels:
+      traefik.enable: true
+    environment:
+      DOZZLE_NO_ANALYTICS: true
+
+version: "3.8"

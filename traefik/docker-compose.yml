@@ -1,0 +1,33 @@
+version: '3'
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:2.10.5
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /opt/appdata/traefik/:/etc/traefik/
+    networks:
+      - proxy
+    labels:
+      traefik.http.routers.api.entryPoints: https
+      traefik.http.routers.api.service: api@internal
+      traefik.enable: true
+    env_file:
+      - ../stack.env
+    restart: unless-stopped
+
+  echo-server:
+    container_name: "echo-server"
+    image: "jmalloc/echo-server:0.3.5"
+    networks:
+      - proxy
+    labels:
+      traefik.http.routers.echo-server.entryPoints: https
+      traefik.http.services.echo-server.loadbalancer.server.port: 8080
+      traefik.enable: true
+
+
+networks:
+  proxy:
+    driver: bridge
+    external: true

@@ -1,0 +1,23 @@
+services:
+
+  nut-upsd:
+    container_name: "nut-upsd"
+    devices:
+      - "/dev/bus/usb/001/004:/dev/bus/usb/001/004"
+    environment:
+      - "API_USER=upsmon"
+      - "API_PASSWORD=123456789ABCDEFGH"
+      - "ADMIN_PASSWORD=123456789ABCDEFGH"
+      - "UPS_NAME=server_ups"
+      - "UPS_DESC=UPS01"
+      - "UPS_DRIVER=usbhid-ups"
+      - "UPS_PORT=auto"
+      - "SHUTDOWN_CMD=echo 'Home has no current. Proceeding to shut down...'"
+    expose:
+      - "3493/tcp"
+    hostname: "nut-upsd"
+    image: "upshift/nut-upsd:2.7.4"
+    network_mode: "host"
+    restart: "always"
+
+version: "3.6"
