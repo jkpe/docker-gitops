@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: curl
-      uses: wei/curl@v1
+      uses: jkpe/curl@v1.0.0
       with:
         args: "'https://example.com'"
         
