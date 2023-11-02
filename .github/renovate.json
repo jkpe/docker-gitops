@@ -3,6 +3,15 @@
   "extends": [
     "config:recommended"
   ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^(workflow-templates|\.(?:github|gitea|forgejo)/workflows)/[^/]+\.ya?ml$"],
+      "matchStrings": ["uses: tailscale\\/github-action@v2(?:\\s+.*\\n)*?.*version: (?<currentValue>.*?)\\n"],
+      "depNameTemplate": "tailscale/tailscale",
+      "datasourceTemplate": "github-releases"
+    }
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],

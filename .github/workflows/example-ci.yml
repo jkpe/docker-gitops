@@ -1,0 +1,32 @@
+name: dozzle
+on:
+    push:
+      paths:
+        - traefik/**
+        - .github/workflows/traefik.yml
+      branches:
+        - main
+        - dev
+
+jobs:
+  deploy-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: tailscale
+      uses: tailscale/github-action@v2
+      with:
+        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+        tags: tag:ci
+        version: 1.50.1
+    
+    - name: docker compose up
+      uses: jkpe/docker-compose-tailscale-gitops-action@v1.0.0
+      with:
+        remote_docker_host: root@100.x.x.x
+        tailscale_ssh: true
+        compose_file_path: traefik/docker-compose.yml
+        upload_directory: true
+        docker_compose_directory: traefik
+        args: up -d
