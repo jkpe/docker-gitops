@@ -22,7 +22,7 @@ jobs:
         version: 1.52.1
     
     - name: docker compose up
-      uses: jkpe/docker-compose-tailscale-gitops-action@v1.1.0
+      uses: jkpe/docker-compose-tailscale-gitops-action@v1.2.0
       with:
         remote_docker_host: root@100.x.x.x
         tailscale_ssh: true
