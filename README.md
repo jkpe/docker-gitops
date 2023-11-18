@@ -11,7 +11,7 @@
 
 If you already use [Renovate](https://docs.renovatebot.com/) to keep dependancies up to date you can use the [regex manager](https://docs.renovatebot.com/modules/manager/regex/) to keep the version of Tailscale used in your GitHub Action up to date by defining it as a dependency.
 
-Here is an example of `renovate.json` that will look for the version string and compare it against the latest [tailscale/tailscale](https://github.com/tailscale/tailscale) GitHub Release.
+Here is an example of `renovate.json5` that will look for the version string and compare it against the latest [tailscale/tailscale](https://github.com/tailscale/tailscale) GitHub Release.
 
 ```json5
 {
