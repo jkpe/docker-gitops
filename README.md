@@ -13,7 +13,7 @@ If you already use [Renovate](https://docs.renovatebot.com/) to keep dependancie
 
 Here is an example of `renovate.json` that will look for the version string and compare it against the latest [tailscale/tailscale](https://github.com/tailscale/tailscale) GitHub Release.
 
-```json
+```json5
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
