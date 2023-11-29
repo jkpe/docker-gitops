@@ -16,7 +16,7 @@ services:
     expose:
       - "3493/tcp"
     hostname: "nut-upsd"
-    image: "upshift/nut-upsd:2.7.4"
+    image: "upshift/nut-upsd:2.8.0"
     network_mode: "host"
     restart: "always"
 
