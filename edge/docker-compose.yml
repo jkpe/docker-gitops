@@ -34,7 +34,7 @@ services:
       traefik.http.services.adguard.loadbalancer.server.port: 3001
 
   nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:2.11.0'
+    image: 'jc21/nginx-proxy-manager:2.11.1'
     restart: "always"
     ports:
       - '443:443'
