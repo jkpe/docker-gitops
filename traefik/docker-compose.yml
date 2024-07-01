@@ -18,7 +18,7 @@ services:
 
   echo-server:
     container_name: "echo-server"
-    image: "jmalloc/echo-server:0.3.6"
+    image: "jmalloc/echo-server:v0.3.7"
     networks:
       - proxy
     labels:
