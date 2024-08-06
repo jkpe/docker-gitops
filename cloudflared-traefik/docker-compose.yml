@@ -13,7 +13,7 @@ services:
       - "--no-autoupdate"
       - "run"
     container_name: "cloudflared-traefik"
-    image: "cloudflare/cloudflared:2024.6.1"
+    image: "cloudflare/cloudflared:2024.8.2"
     restart: "unless-stopped"
     networks:
       - "proxy"
