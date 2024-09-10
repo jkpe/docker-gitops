@@ -13,7 +13,7 @@ services:
       - "--no-autoupdate"
       - "run"
     container_name: "cloudflared"
-    image: "cloudflare/cloudflared:2024.9.0"
+    image: "cloudflare/cloudflared:2024.9.1"
     restart: "always"
 
   adguardhome:
