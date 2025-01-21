@@ -5,7 +5,7 @@ networks:
 services:
   portainer:
     container_name: "portainer"
-    image: "portainer/portainer-ce:2.26.0"
+    image: "portainer/portainer-ce:2.26.1"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.entrypoints=https"
