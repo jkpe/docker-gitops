@@ -18,7 +18,7 @@ services:
 
   adguardhome:
     container_name: "adguardhome"
-    image: "adguard/adguardhome:v0.107.55"
+    image: "adguard/adguardhome:v0.107.56"
     restart: "always"
     ports:
       - '53:53'
